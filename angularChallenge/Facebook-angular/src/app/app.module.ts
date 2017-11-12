@@ -6,11 +6,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {CustomerFormComponent} from './customer-form/customer-form.component';
 import {CustomerService} from './customer.service';
+import { NewsComponent } from './news/news.component';
  
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
