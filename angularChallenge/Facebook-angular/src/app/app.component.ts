@@ -6,6 +6,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'JavaSampleApproach';
-  description = 'Angular4-SpringBoot Demo';
+  title = 'Welcome Faceuser';
+  description = 'Enter Credentials';
 }
