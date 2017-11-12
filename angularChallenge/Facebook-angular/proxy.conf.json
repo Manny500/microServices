@@ -1,0 +1,11 @@
+{
+    "/news": {
+        "target": "http://localhost:8765/facebook-details-service-news",
+        "secure": false
+    },
+    
+     "/login": {
+        "target": "http://localhost:8765/facebook-details-service-login",
+        "secure": false
+    }
+}
