@@ -18,20 +18,26 @@ public class LoginCtrl {
 	@Autowired
 	FaceUserRepo userRepo;
 	
-	private final static String POST_CUSTOMER_URL = "/login";
+	private final static String POST_FACEUSER_URL = "/login";
 
-	@PostMapping(POST_CUSTOMER_URL)
-	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+	@PostMapping(POST_FACEUSER_URL)
+	public ResponseEntity<FaceUser> authenticateFaceuser(@RequestBody FaceUser user) {
+						
+		FaceUser fu = userRepo.findByfaceUsername(user.getFaceUsername());
 		
-		System.out.println("Creat Customer: " + customer);
-		
-		FaceUser user = new FaceUser();
-		
-		user.setFaceUsername("j");
-		
-		System.out.println("From database: "+ userRepo.findByfaceUsername(user.getFaceUsername()).getFaceFn());
-		
-		return ResponseEntity.ok(customer);
+		if(fu != null) {
+				
+			if(user.getFaceUsername().equals(fu.getFaceUsername()) && user.getFacePassword().equals(fu.getFacePassword())) {
+				
+				user = fu;
+			}else {
+				user = new FaceUser();
+			}
+		}else {
+			user = new FaceUser();
+		}
+	
+		return ResponseEntity.ok(user);
 	}
 
 }
