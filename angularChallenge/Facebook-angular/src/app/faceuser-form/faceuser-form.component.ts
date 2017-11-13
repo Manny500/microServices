@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 
 import {Faceuser} from '../faceuser.interface';
 import {FaceuserService} from '../faceuser.service';
+import {Router, CanActivate} from '@angular/router'
 
 @Component({
   selector: 'faceuser-form',
@@ -11,10 +12,11 @@ import {FaceuserService} from '../faceuser.service';
   styleUrls: ['./faceuser-form.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class FaceuserFormComponent implements OnInit {
 
-  faceuser: Faceuser = {faceUsername: '', facePassword: ''};
-  constructor(private faceuserService: FaceuserService) {}
+  faceuser: Faceuser = {faceId: null, faceUsername: '', facePassword: ''};
+  constructor(private faceuserService: FaceuserService, private router: Router) {}
 
   ngOnInit() {
   }
@@ -22,7 +24,15 @@ export class FaceuserFormComponent implements OnInit {
   onSubmit(){
     this.faceuserService.createFaceuser(this.faceuser).subscribe(
       value => {
-        console.log('[POST]  successfully', value);
+        console.log(value);
+        if(value.faceId != 0){
+          //redirect to news
+          // this.router.navigate(['/news']);
+          this.router.navigateByUrl('/news');
+        }else{
+          //refresh login
+          this.router.navigate(['/login']);
+        }
       }, error => {
         console.log('FAIL !');
       },
